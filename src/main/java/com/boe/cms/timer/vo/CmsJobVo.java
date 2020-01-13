@@ -1,20 +1,19 @@
 package com.boe.cms.timer.vo;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import com.boe.cms.timer.enums.JobStatusEnum;
 import com.boe.cms.timer.enums.StatusEnum;
 import com.boe.cms.timer.enums.TriggerTypeEnum;
 import com.boe.cms.timer.valid.AddValidGroup;
 import com.boe.cms.timer.valid.UpdateValidGroup;
+import com.boe.cms.timer.valid.json.Json;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.Data;
+
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class CmsJobVo {
@@ -70,5 +69,9 @@ public class CmsJobVo {
 	private JobStatusEnum jobStatus;
 	
 	private Integer totalCount;
+
+	@Json(message = "extraInfo field err", groups = {AddValidGroup.class, UpdateValidGroup.class})
+	@NotBlank(message = "extraInfo field err", groups = {AddValidGroup.class, UpdateValidGroup.class})
+	private String extraInfo;
 
 }

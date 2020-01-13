@@ -1,10 +1,10 @@
-package com.boe.cms.timer.valid;
+package com.boe.cms.timer.valid.strs;
 
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 public class AllowedStrValuesValidator implements ConstraintValidator<AllowedStrValues,String>  {
 	
@@ -22,6 +22,9 @@ public class AllowedStrValuesValidator implements ConstraintValidator<AllowedStr
 		}
 		return false;
 	}
+
+
+
 
 	
 

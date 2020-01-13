@@ -1,9 +1,8 @@
 package com.boe.cms.timer.exception;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.boe.cms.timer.common.ResponseResult;
+import com.boe.cms.timer.valid.BeanValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,10 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.boe.cms.timer.common.ResponseResult;
-import com.boe.cms.timer.valid.BeanValidator;
-
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @RestControllerAdvice
 @Slf4j
@@ -74,13 +71,13 @@ public class ExceptionAdviceHandler {
 		return f(ExceptionEnum.JOB_EXIST_ERR, e.getMessage());
 	}
 	
-	/** CustomException全局异常处理 */
-	@ExceptionHandler(value = CustomException.class)
+	/** ClientException全局异常处理 */
+	@ExceptionHandler(value = ClientException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
-	public Object CustomException(CustomException e) {
+	public Object ClientException(ClientException e) {
 		log.error(e.getMessage(), e);
-		return f(ExceptionEnum.JOB_EXIST_ERR, e.getMessage());
+		return f(ExceptionEnum.CLIENT_ERR, e.getMessage());
 	}
 	/** ServerException全局异常处理 */
 	@ExceptionHandler(value = ServerException.class)

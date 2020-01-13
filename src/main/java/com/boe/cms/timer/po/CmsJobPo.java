@@ -62,5 +62,7 @@ public class CmsJobPo {
 	
 	private Integer totalCount;
 
+	private String extraInfo;
+
 }
 

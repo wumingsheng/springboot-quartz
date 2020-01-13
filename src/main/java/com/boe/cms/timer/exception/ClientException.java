@@ -1,6 +1,6 @@
 package com.boe.cms.timer.exception;
 
-public class CustomException extends RuntimeException {
+public class ClientException extends RuntimeException {
 	
 	
 	
@@ -9,7 +9,7 @@ public class CustomException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = -504349665971110591L;
 
-	public CustomException(String message) {
+	public ClientException(String message) {
 		super(message);
 	}
 

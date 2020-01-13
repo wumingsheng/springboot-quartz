@@ -1,7 +1,10 @@
 package com.boe.cms.timer.timer.job;
 
-import java.util.Optional;
-
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.boe.cms.timer.dao.CmsJobMapper;
+import com.boe.cms.timer.po.CmsJobPo;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -10,12 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.boe.cms.timer.dao.CmsJobMapper;
-import com.boe.cms.timer.po.CmsJobPo;
-
-import lombok.extern.slf4j.Slf4j;
+import java.util.Optional;
 
 
 
@@ -42,7 +40,7 @@ public class LogJob extends QuartzJobBean {
 		CmsJobPo cmsJobPo = cmsJobMapper.selectOne(lambdaQuery);
 		log.info(">>>>>>>cmsJobPo is :{}", cmsJobPo);
 		Optional.ofNullable(cmsJobPo).ifPresent(job -> {
-			log.info(">>>>>>>>>job is : {}", job);
+			log.info(">>>>>>>>> extra info params is : {}", job.getExtraInfo());
 		});
 		
 		

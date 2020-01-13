@@ -10,7 +10,7 @@ public enum ExceptionEnum {
 	
 	JOB_EXIST_ERR(200003, "Job已近存在"),
 	
-	CUSTOM_ERR(20004, "ERR"),
+	CLIENT_ERR(20004, "客户端错误"),
 	
 	SERVER_ERR(20005, "服务器内部运行错误");
 	

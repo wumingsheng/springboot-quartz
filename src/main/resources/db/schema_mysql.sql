@@ -21,6 +21,7 @@ create table if not exists CMS_JOB (
     create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP comment '创建时间',
     update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
     total_count int(11) NOT NULL DEFAULT 0 COMMENT '执行总次数 0 就是没有次数限制',
+    extra_info varchar(512) NOT NULL DEFAULT '' COMMENT '参数params',
 
 --    unique index code_index(code),
     unique index group_name_job_index(job_group, job_name),

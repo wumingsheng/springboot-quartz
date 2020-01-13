@@ -1,13 +1,5 @@
 package com.boe.cms.timer.service.impl;
 
-import java.time.LocalDateTime;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.boe.cms.timer.common.Constant;
@@ -16,13 +8,20 @@ import com.boe.cms.timer.common.ResponseResult;
 import com.boe.cms.timer.dao.CmsJobMapper;
 import com.boe.cms.timer.enums.JobStatusEnum;
 import com.boe.cms.timer.enums.StatusEnum;
-import com.boe.cms.timer.exception.CustomException;
+import com.boe.cms.timer.exception.ClientException;
 import com.boe.cms.timer.exception.JobExistException;
 import com.boe.cms.timer.po.CmsJobPo;
 import com.boe.cms.timer.service.JobService;
 import com.boe.cms.timer.timer.IJobHandler;
 import com.boe.cms.timer.timer.ScheduleJob;
 import com.boe.cms.timer.tools.DateUtil;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 
 @Service
@@ -49,7 +48,7 @@ public class JobServiceImpl implements JobService {
 		triggerQuery.eq(CmsJobPo::getTriggerGroup, cmsJobPo.getTriggerGroup()).eq(CmsJobPo::getTriggerName, cmsJobPo.getTriggerName());
 		Integer triggerCount = cmsJobMapper.selectCount(triggerQuery);
 		if(triggerCount > 0) {
-			throw new CustomException("trigger already exist");
+			throw new ClientException("trigger already exist");
 		}
 		
 		
