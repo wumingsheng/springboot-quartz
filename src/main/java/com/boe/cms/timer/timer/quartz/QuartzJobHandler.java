@@ -1,8 +1,10 @@
 package com.boe.cms.timer.timer.quartz;
 
+import org.quartz.JobDataMap;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+import org.quartz.TriggerKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,16 +26,10 @@ public class QuartzJobHandler implements IJobHandler {
 	private QuartzHandlerContext handlerContext;
 
 	@Override
-	public void addJob(ScheduleJob scheduleJob) throws Exception {
+	public void addJob(ScheduleJob scheduleJob, JobDataMap jobDataMap, JobDataMap triggerDataMap) throws Exception {
 		log.info(">>>>>>>scheduleJob : {}", scheduleJob);
 		AbstractHandler abstractHandler = handlerContext.getInstance(scheduleJob);
-		abstractHandler.addJob(scheduler, scheduleJob);
-		
-	}
-
-	@Override
-	public void updateJob(ScheduleJob scheduleJob) throws Exception {
-		log.info(">>>>>>>scheduleJob : {}", scheduleJob);
+		abstractHandler.addJob(scheduler, scheduleJob, jobDataMap, triggerDataMap);
 		
 	}
 
@@ -68,12 +64,12 @@ public class QuartzJobHandler implements IJobHandler {
 	}
 
 	@Override
-	public void triggerJob(ScheduleJob scheduleJob) throws Exception {
-		log.info(">>>>>>>scheduleJob : {}", scheduleJob);
+	public void triggerJob(ScheduleJob scheduleJob, JobDataMap jobDataMap) throws Exception {
+		log.info(">>>>>>>scheduleJob : {},[jobDataMap={}]", scheduleJob, jobDataMap);
 		
 		try {
 			JobKey jobKey = JobKey.jobKey(scheduleJob.getJobName(), scheduleJob.getJobGroup());
-			scheduler.triggerJob(jobKey);
+			scheduler.triggerJob(jobKey, jobDataMap);
 			log.info("Run schedule job {}-{} success", scheduleJob.getJobGroup(), scheduleJob.getJobName());
 		} catch (SchedulerException e) {
 			log.error("Run schedule job failed", e);
@@ -96,6 +92,15 @@ public class QuartzJobHandler implements IJobHandler {
 			throw new ServerException("Delete job failed");
 		}
 		
+	}
+	
+	
+	@Override
+	public void resetTriggerFromErrorState(ScheduleJob scheduleJob) throws Exception {
+		log.info(">>>>>>>resetTriggerFromErrorState : {}", scheduleJob);
+		TriggerKey triggerKey = TriggerKey.triggerKey(scheduleJob.getJobName(), scheduleJob.getJobGroup());
+		scheduler.resetTriggerFromErrorState(triggerKey);
+		log.info("<<<<<<<<<<<<<< resetTriggerFromErrorState finished");
 	}
 	
 

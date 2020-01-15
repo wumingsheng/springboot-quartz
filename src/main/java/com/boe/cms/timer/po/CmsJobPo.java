@@ -1,16 +1,15 @@
 package com.boe.cms.timer.po;
 
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.boe.cms.timer.enums.JobStatusEnum;
 import com.boe.cms.timer.enums.StatusEnum;
 import com.boe.cms.timer.enums.TriggerTypeEnum;
-
 import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 /**
  * 
  * @author wumingsheng
@@ -55,6 +54,8 @@ public class CmsJobPo {
 	private String triggerDescription;
 
 	private Date startTime;
+
+	private Date endTime;
 
 	private String className;
 	

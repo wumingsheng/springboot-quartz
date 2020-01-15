@@ -46,4 +46,14 @@ public class ResponseResult<T> {
 		return responseResult;
 	}
 
+	public static <T> ResponseResult<T> fail(Integer code, String msg, T data) {
+		ResponseResult<T> responseResult = new ResponseResult<>(code, msg, data);
+		return responseResult;
+	}
+
+	public static <T> ResponseResult<T> fail(ResponseEnum responseE, T data) {
+		ResponseResult<T> responseResult = new ResponseResult<>(responseE.getCode(), responseE.getMessage(), data);
+		return responseResult;
+	}
+
 }

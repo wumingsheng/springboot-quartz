@@ -13,6 +13,7 @@ create table if not exists CMS_JOB (
     trigger_group varchar(64) NOT NULL default '' comment 'trigger group',
     trigger_description varchar(255) NOT NULL default '' comment 'trigger description',
     start_time timestamp NOT NULL COMMENT '任务第一次开始执行的时间',
+    end_time timestamp NULL default null COMMENT '任务结束的时间',
     class_name varchar(255) NOT NULL default '' COMMENT 'classname',
     job_status varchar(16) not null default '' comment 'job status',
     creater_id varchar(32) NOT NULL default ''  COMMENT 'creater id',

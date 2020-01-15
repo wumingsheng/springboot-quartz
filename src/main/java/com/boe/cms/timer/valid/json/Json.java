@@ -16,6 +16,12 @@ public @interface Json {
      * {} 返回true
      * */
 
+
+
+
+
+
+
     String message() default "json format err";
 
     Class<?>[] groups() default {};

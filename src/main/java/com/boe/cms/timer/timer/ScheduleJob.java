@@ -1,11 +1,10 @@
 package com.boe.cms.timer.timer;
 
-import java.util.Date;
-
 import com.boe.cms.timer.enums.JobStatusEnum;
 import com.boe.cms.timer.enums.TriggerTypeEnum;
-
 import lombok.Data;
+
+import java.util.Date;
 
 
 @Data
@@ -31,9 +30,13 @@ public class ScheduleJob {
 
 	private Date startTime;
 
+	private Date endTime;
+
 	private String className;
 	
 	private JobStatusEnum jobStatus;
 	
 	private Integer totalCount;
+
+	private String extraInfo;
 }

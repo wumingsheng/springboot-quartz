@@ -4,8 +4,9 @@ public enum ResponseEnum {
 	
 	
 
-	SUCCESS(100000, "请求成功");
-    
+	SUCCESS(100000, "请求成功"),
+
+	FAIL(100001, "请求失败");
     
 	
 	private Integer code;
